@@ -101,9 +101,9 @@ else:
 
 
 ###################### MODELE MACHINE LEARNING ######################
-X=pd.read_csv(r"X.csv")
+X=pd.read_csv("https://raw.githubusercontent.com/AmandineRolland/The-stonewall-rangers/main/X.csv")
 #st.dataframe(X)
-y=pd.read_csv(r"y.csv")
+y=pd.read_csv("https://raw.githubusercontent.com/AmandineRolland/The-stonewall-rangers/main/y.csv")
 
 X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=30)
 modelDTR=DecisionTreeRegressor(max_depth=4)
@@ -118,3 +118,4 @@ st.subheader('Price estimation')
 st.info(estimation)
 
 ############################
+
