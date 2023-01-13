@@ -7,9 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 
-
-st.title("The Stonewall Rangers")
-st.header('Real Estate')
+st.image('./images/logo.png')
+#st.title("The Stonewall Rangers")
+#st.header('Real Estate')
 
 st.subheader('Price predictor')
 
@@ -114,8 +114,11 @@ X_predict=[[surface_reelle_bati,nombre_pieces_principales,Code_Postal, apparteme
 estimation=int(modelLR.predict(X_predict)[0][0])
 
 ########################### AFFICHE L'ESTIMATION ######################################
-st.subheader('Price estimation (€)')
-st.info(estimation)
-
+#st.subheader('Price estimation (€)')
+#st.info(estimation)
+if estimation>0:
+    st.metric(label='Price estimation (€)',value=estimation)
+else:
+    st.metric(label='Price estimation (€)',value='')
 ############################
 
