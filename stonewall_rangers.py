@@ -84,6 +84,15 @@ with col1 :
 
     Code_Postal=st.selectbox('Insert a zip code',zip_code_list)
 
+    cp_ville=pd.read_csv("https://raw.githubusercontent.com/AmandineRolland/The-stonewall-rangers/main/cp_ville.csv")
+    #st.dataframe(cp_ville)
+    city=cp_ville[cp_ville['Code Postal']==Code_Postal]['nom_commune'].unique().tolist()
+    #st.write(Code_Postal)
+    villes=''
+    for ville in city:
+        villes=villes+str(ville)+"/"
+    
+    st.write(villes)
 
     type_local= st.radio("What type of property  are you looking for ?",
     ('House', 'Appartment', 'Industrial/commercial permises'))
