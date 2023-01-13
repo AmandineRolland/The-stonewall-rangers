@@ -12,15 +12,17 @@ st.image('./images/logo.png')
 #st.header('Real Estate')
 
 st.subheader('Price predictor')
+col1, col2,col3 = st.columns([3,1,1])
 
+with col1 :
 # entrée des paramètres pour l'estimation du prix
 
-surface_reelle_bati = st.number_input(label='Insert an area (m²)',step=1,min_value=0)
+    surface_reelle_bati = st.number_input(label='Insert an area (m²)',step=1,min_value=0)
 
-nombre_pieces_principales=st.number_input('Insert the number of room',step=1,min_value=0)
+    nombre_pieces_principales=st.number_input('Insert the number of room',step=1,min_value=0)
 
 # Liste des codes postaux
-zip_code_list=[75001, 75002, 75003, 75004, 75005, 75006, 75007, 75008, 75009,
+    zip_code_list=[75001, 75002, 75003, 75004, 75005, 75006, 75007, 75008, 75009,
        75010, 75011, 75012, 75013, 75014, 75015, 75016, 75017, 75018,
        75019, 75020, 77000, 77090, 77100, 77111, 77114, 77115, 77118,
        77120, 77122, 77123, 77124, 77126, 77127, 77130, 77131, 77133,
@@ -80,24 +82,25 @@ zip_code_list=[75001, 75002, 75003, 75004, 75005, 75006, 75007, 75008, 75009,
        95830, 95840, 95850, 95870, 95880]
 
 
-Code_Postal=st.selectbox('Insert a zip code',zip_code_list)
+    Code_Postal=st.selectbox('Insert a zip code',zip_code_list)
 
 
-type_local= st.radio("What type of property  are you looking for ?",
+    type_local= st.radio("What type of property  are you looking for ?",
     ('House', 'Appartment', 'Industrial/commercial permises'))
 
-if type_local == 'House':
-    maison=1
-    appartement=0
-    local_industriel=0
-elif type_local=='Appartment':
-    appartement=1
-    maison=0
-    local_industriel=0
-else:
-    local_industriel=1
-    appartement=0
-    maison=0
+    if type_local == 'House':
+        maison=1
+        appartement=0
+        local_industriel=0
+
+    elif type_local=='Appartment':
+        appartement=1
+        maison=0
+        local_industriel=0
+    else:
+        local_industriel=1
+        appartement=0
+        maison=0
 
 
 ###################### MODELE MACHINE LEARNING ######################
@@ -116,9 +119,16 @@ estimation=int(modelLR.predict(X_predict)[0][0])
 ########################### AFFICHE L'ESTIMATION ######################################
 #st.subheader('Price estimation (€)')
 #st.info(estimation)
-if estimation>0:
-    st.metric(label='Price estimation (€)',value=estimation)
-else:
-    st.metric(label='Price estimation (€)',value='')
+
+with col2:
+    st.write('')
+    #utilisé juste pour avoir un espace vide
+
+with col3 :
+
+    if estimation>0:
+        st.metric(label='Price estimation ',value=(f"{estimation} €"))
+    else:
+        st.metric(label='Price estimation (€)',value='')
 ############################
 
