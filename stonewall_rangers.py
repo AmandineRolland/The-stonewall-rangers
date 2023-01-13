@@ -106,15 +106,15 @@ X=pd.read_csv("https://raw.githubusercontent.com/AmandineRolland/The-stonewall-r
 y=pd.read_csv("https://raw.githubusercontent.com/AmandineRolland/The-stonewall-rangers/main/y.csv")
 
 X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=30)
-modelDTR=DecisionTreeRegressor(max_depth=4)
-modelDTR.fit(X_train,y_train)
+modelLR=LinearRegression()
+modelLR.fit(X_train,y_train)
 
 X_predict=[[surface_reelle_bati,nombre_pieces_principales,Code_Postal, appartement,local_industriel,maison]]
 
-estimation=modelDTR.predict(X_predict)
+estimation=int(modelLR.predict(X_predict)[0][0])
 
 ########################### AFFICHE L'ESTIMATION ######################################
-st.subheader('Price estimation')
+st.subheader('Price estimation (€)')
 st.info(estimation)
 
 ############################
